@@ -1,13 +1,4 @@
-// window.onload = function (arr_sost) {
-//     document.getElementsByTagName('table')[0].addEventListener('click', function (e) {
-//         let y = e.target.parentElement.rowIndex;
-//         let x = e.target.cellIndex;
-//         print_elem_sost(x, y, arr_sost);
-//     }, false);
-// }
-
 function start() {
-    // sost = [[]]
     let arr_sost = gen_table_and_arr_sost();
 }
 
@@ -15,7 +6,6 @@ function check_in_arr_cell_complete(y, x, arr_sost, arr_cell_complete) {
     // Функция для того, чтобы установить, обрабатывалась ячейка или нет
     // Необходима с целью избежать бесконечного цикла или рекурсии, тк при перемещении индекса, не отмечала ячейку с которой пришел и возвращался к ней обратно
     for (let i = 0; i < arr_cell_complete.length; i++) {
-        // console.log('arr_cell_complete[i] = ', arr_cell_complete[i], 'arr_sost[y][x] = ', Array(y, x));
         if (String(arr_cell_complete[i]) == String(Array(y, x))) {
             return (false);
         } else if ((arr_cell_complete != arr_sost[y][x]) && (i == arr_cell_complete.length - 1)) {
@@ -145,75 +135,8 @@ function check_and_set_flag_table(table, arr_sost, y, x) {
     }
 }
 
-// function bom_has_been_defused(table, arr_sost) {
-//     let y = 0;
-//     let x = 0;
-//     for (let i = 0; i < 20; i++) {
-//         y++;
-//         for (let j = 0; j < 40; j++) {
-//             x++;
-//             try {
-//                 let cell_value = table.rows[y].cells[x].innerHTML;
-//                 let arr_bomb = [];
-//                 let schetchik_izvestnih = 0;
-//                 let arr = check_cell_complete_in_table(table, arr_sost, y, x);
-//                 arr_bomb = arr[0];
-//                 schetchik_izvestnih = arr[1];
-//                 if ((cell_value == "1") && (schetchik_izvestnih == 7)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 } else if ((cell_value == "2") && (schetchik_izvestnih == 6)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 } else if ((cell_value == "3") && (schetchik_izvestnih == 5)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 } else if ((cell_value == "4") && (schetchik_izvestnih == 4)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 }
-//             } catch (error) {
-//                 let cell_value = 'undef';
-//                 let arr_bomb = [];
-//                 let schetchik_izvestnih = 0;
-//                 console.log('');
-//                 let arr = check_cell_complete_in_table(table, arr_sost, y, x);
-//                 arr_bomb = arr[0];
-//                 schetchik_izvestnih = arr[1];
-//                 if ((cell_value == "1") && (schetchik_izvestnih == 7)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 } else if ((cell_value == "2") && (schetchik_izvestnih == 6)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 } else if ((cell_value == "3") && (schetchik_izvestnih == 5)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 } else if ((cell_value == "4") && (schetchik_izvestnih == 4)) {
-//                     if (arr_bomb != undefined) {
-//                         print_bomb(table, arr_bomb);
-//                     }
-//                 }
-//             }
-
-//         }
-//     }
-// }
-
 function print_bomb(table, arr_bomb) {
-    // console.log('print_bomb');
     for (let i = 0; i < arr_bomb.length; i++) {
-        // img = document.createElement('img');
-        // img.src = 'Bombdefusal.png';
-        // table.rows[arr_bomb[i][0]].cells[arr_bomb[i][1]].style = 'background-color: blue;'
-        // table.rows[arr_bomb[i][0]].cells[arr_bomb[i][1]].appendChild(img);
         table.rows[arr_bomb[i][0]].cells[arr_bomb[i][1]].innerHTML = 'b';
         table.rows[arr_bomb[i][0]].cells[arr_bomb[i][1]].style = 'background-color: rgb(144, 232, 182);';
     }
@@ -342,7 +265,6 @@ function check_area_of_value(table, y, x, arr_sost, arr_cell_complete) {
     } catch (error) {
         schetchik_izvestnih++;
     }
-    // console.log('ARR_SOST = ', arr_bomb);
     return [arr_bomb, schetchik_izvestnih];
 }
 
@@ -373,10 +295,6 @@ function check_and_set_flag(table, arr_sost, arr_numbers_maybe_to_flag, arr_cell
                 print_bomb(table, arr_bomb);
             }
         }
-
-        // if (String(arr_numbers_maybe_to_flag[i]) == String(sost[y, x])) {
-
-        // }
     }
 }
 
@@ -573,7 +491,6 @@ function print_all_field(arr_sost) {
     }
     setTimeout(() => {
         end_game();
-        // console.log(arr_sost);
     }, 2000);
 }
 
@@ -646,8 +563,6 @@ function gen_table_and_arr_sost() {
     document.getElementById('body').appendChild(table);
     document.getElementById('body').appendChild(btn_reset);
     localStorage.setItem('arr_sost', arr_sost);
-    // console.log(arr_sost);
-
     return (arr_sost);
 }
 
@@ -661,7 +576,7 @@ function click_repeat(table, arr_sost) {
                 let cell_value = table.rows[y].cells[x].innerHTML;
                 if ((cell_value == "1") || (cell_value == "2") || (cell_value == "3") || (cell_value == "4")) {
                     arr_with_indexes.push(Array(Array(y, x), Array(cell_value)));
-                    
+
                 }
                 x++;
             } catch {}
@@ -672,7 +587,7 @@ function click_repeat(table, arr_sost) {
     console.log('arr_with_indexes = ', arr_with_indexes)
     if (arr_with_indexes.length != 0) {
         for (let i = 0; i < arr_with_indexes.length; i++) {
-            
+
             let indexes = arr_with_indexes[i][0];
             console.log('indexes = ', indexes);
             y = Number(indexes[0]);
@@ -748,42 +663,13 @@ function print_elem_sost(x, y, arr_sost) {
         check_empty_cells(y, x, arr_sost, undefined, arr_cell_complete);
         console.log('before y = ', y, 'x = ', x);
         click_repeat(table, arr_sost);
-        // bom_has_been_defused(table, arr_sost);
     } else {
         console.log('before y = ', y, 'x = ', x);
         table.rows[y].cells[x].innerHTML = arr_sost[y][x];
         check_and_set_flag_table(table, arr_sost, y, x);
         click_repeat(table, arr_sost);
-        // bom_has_been_defused(table, arr_sost);
 
     }
-
-    // let arr_cell_complete_history = [1, 2, 3];
-    // localStorage.setItem('arr_cell_complete_history', arr_cell_complete_history);
-    // console.log('local = ', localStorage.getItem('arr_cell_complete_history'));
-    //     if ((arr_cell_complete.length != 0) && (localStorage.getItem('arr_cell_complete_history') !== null)) {
-    //         let a = localStorage.getItem('arr_cell_complete_history');
-
-    //         console.log('a = ', a);
-    //         a.split(',');
-    //         console.log('a = ', a);
-    //         for (let i = 0; i < arr_cell_complete.length; i++) {
-    //             arr_cell_complete_history.push(1);
-    //             if (i == 0) {
-    //                 arr_cell_complete_history[i] = Array(a[i], a[i + 1]);
-    //             } else {
-    //                 arr_cell_complete_history[i] = Array(a[i + 1], a[i + 2]);
-    //                 // console.log('arr_cell_complete_history in cicle 1= ', arr_cell_complete_history);
-    //             }
-    //         }
-    //         localStorage.setItem('arr_cell_complete_history', arr_cell_complete_history);
-    //     } else {
-    //         localStorage.setItem('arr_cell_complete_history', arr_cell_complete);
-    //     }
-
-    //     console.log('arr_cell_complete_history = ', arr_cell_complete_history);
-
-
 }
 
 function click1(cell) {
