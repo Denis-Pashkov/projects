@@ -1,0 +1,12 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Доступ запрещен{% endblock title %}
+
+{% block content %}
+<div class="features" id="features">
+    <h1>Доступ запрещен 403. За предоставлением обратитесь к администратору.</h1>
+    <form action="{% url 'contacts' %}">
+        <button class="btn btn-primary" type="submit">Контакты</button>
+    </form>
+</div>
+{% endblock content %}

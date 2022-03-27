@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Оставить отзыв{% endblock title %}
+
+{% block head %}
+<style>
+    .container-fluid.list_r {
+        background-color: #FFD673;
+        margin: 0 auto;
+        width: 40%;
+    }
+</style>
+{% endblock head %}
+
+{% block content %}
+<h1>Отзывы</h1>
+<form action="{% url 'send_reviews'%}">
+    <button class="btn btn-primary" type="submit">Оставить отзыв</button>
+</form>
+
+{% for i in reviewes_list %}
+<div class="container-fluid list_r">
+    {{ i.title }}<br>
+    {{ i.rewiew }}<br>
+    {{ i.username }}<br>
+    {{ i.date }}
+</div><br>
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Неверный запрос{% endblock title %}
+
+{% block content %}
+<div class="features" id="features">
+    <h1>Неверный запрос 400.</h1>
+    <form action="{% url 'home' %}">
+        <button class="btn btn-primary" type="submit">На главную</button>
+    </form>
+</div>
+{% endblock content %}

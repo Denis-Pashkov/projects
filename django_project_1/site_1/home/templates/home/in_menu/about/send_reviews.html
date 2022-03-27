@@ -1,0 +1,29 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Оставить отзыв{% endblock title %}
+
+{% block head %}
+<style>
+</style>
+{% endblock head %}
+
+{% block content %}
+<h1>Оставить отзыв</h1>
+
+{% if user.is_authenticated %}
+
+<form method="post" id="form">
+    {% csrf_token %}
+    {{ user_form.title }}
+    {{ user_form.rewiew }}
+
+    <p><input type="submit" class="btn btn-info" id="btn-subm" value="Отправить отзыв"></p>
+</form>
+
+{% else %}
+
+<h1>Чтобы оставить отзыв зарегистрирутесь или выполните вход.</h1>
+
+{% endif %}
+
+{% endblock content %}

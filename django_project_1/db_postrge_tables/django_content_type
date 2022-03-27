@@ -1,0 +1,8 @@
+1;captcha;captchastore
+2;admin;logentry
+3;auth;permission
+4;auth;group
+5;auth;user
+6;contenttypes;contenttype
+7;sessions;session
+8;home;reviews
