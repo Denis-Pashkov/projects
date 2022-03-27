@@ -1,0 +1,14 @@
+{% extends 'first_app/base.html' %}
+
+{% block title %}Удаление статьи{% endblock title %}
+
+{% block content %}
+<div class="features" id="features">
+    <h1>Удалить статью?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Удалить статью</button> 
+    </form>
+</div>
+
+{% endblock content %}

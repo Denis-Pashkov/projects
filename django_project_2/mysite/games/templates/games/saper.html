@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'games/css/saper.css' %}">
+    <script src="{% static 'games/js/saper.js' %}" defer></script>
+    <title>Сапер</title>
+</head>
+
+<body id="body">
+
+
+    <form action="{% url 'home'%}">
+        <button class="btn btn-primary" type="submit">На главную</button>
+    </form>
+    <form action="{% url 'games'%}">
+        <button class="btn btn-primary" type="submit">В меню выбора игры</button>
+    </form>
+</body>
+
+</html>

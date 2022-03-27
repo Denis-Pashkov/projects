@@ -1,0 +1,22 @@
+{% extends 'first_app/base.html' %}
+
+{% block title %}Список игр и приложений{% endblock title %}
+
+{% block content %}
+<style>
+    .regout1{
+        font-size:50px;
+        height:100px;
+        {% comment %} width:300px; {% endcomment %}
+    }
+</style>
+<div class="features">
+    <h2>Список игр и приложений</h2>
+    <form action="{% url 'saper'%}">
+        <button class="btn btn-primary regout1" type="submit">Сапер</button>
+    </form>
+    <form action="{% url 'calc'%}">
+        <button class="btn btn-primary regout1" type="submit">Калькулятор</button>
+    </form>
+</div>
+{% endblock content %}

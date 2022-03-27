@@ -1,0 +1,24 @@
+{% extends 'first_app/base.html' %}
+{% load static %}
+{% block title %}{{ arcticle.title }}{% endblock title %}
+{% block head %}
+<style>
+    body {
+        background-image: url('{% static 'first_app/img/pexels-felix-mittermeier-956999.jpg' %}');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+    }
+</style>
+{% endblock head %}
+{% block content %}
+<div class="features" id="features">
+    <h1>{{ arcticle.title }}</h1>
+    <h2>{{ arcticle.anons }}</h2>
+    <p>{{ arcticle.full_text }}</p>
+    <a href="{% url 'news_update' arcticle.id %}" class="btn btn-warning">Редактировать</a>
+    <a href="{% url 'news_delete' arcticle.id  %}" class="btn btn-danger">Удалить</a>
+    <hr>
+    <p>{{ arcticle.date }}</p>
+</div>
+{% endblock content %}

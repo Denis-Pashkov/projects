@@ -1,0 +1,18 @@
+{% extends 'first_app/base.html' %}
+{% block title %}Текущее время{% endblock title %}
+{% block head %}
+<style>
+    body {
+        background-image: url('{{ bgimage }}');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+    }
+</style>
+{% endblock head %}
+{% block content %}
+<div class="features" id="features">
+    <p id="cur_date_time">Time now: {{ date }}</p>
+</div>
+
+{% endblock  %}

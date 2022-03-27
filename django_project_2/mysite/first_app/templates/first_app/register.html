@@ -1,0 +1,23 @@
+{% extends 'first_app/base.html' %}
+
+{% block title %}Регистрация{% endblock title %}
+{% block head %}<style>
+    body {
+        background-image: url('../../static/first_app/img/pexels-marina-gr-9818108.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+    }
+</style>{% endblock head %}
+{% block content %}
+<div class="features" id="features">
+    <h1>Регистрация</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-info">Регистрация</button>
+    </form>
+
+</div>
+
+{% endblock content %}

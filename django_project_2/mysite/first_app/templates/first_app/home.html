@@ -1,0 +1,20 @@
+{% extends 'first_app/base.html' %}
+{% block title %}Домашняя станица{% endblock title %}
+{% block head %}<style>
+    body {
+        background-image: url('{{ bgimage }}');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+    }
+</style>{% endblock head %}
+{% block content %}
+
+<div class="features" id="features">
+    <h1>Домашняя страница</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, natus magnam! Commodi mollitia pariatur voluptas.
+        Dolorem unde optio distinctio facere repellat quia corrupti expedita quis, neque corporis placeat saepe
+        provident.</p>
+</div>
+{{text}}
+{% endblock  %}
