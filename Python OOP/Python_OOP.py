@@ -1,3 +1,5 @@
+""" От простых классов к составным """
+
 from typing import TypeVar
 from random import choice, randrange
 import re
