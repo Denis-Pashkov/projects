@@ -155,10 +155,6 @@ class Graph:
         print(' '.join(
             [str(i) for i in self.data if self.LIMIT_Y[0] <= i <= self.LIMIT_Y[1]]))
 
-    # def draw(self):
-    #     print(*filter(lambda x: self.LIMIT_Y[0] <= x <= self.LIMIT_Y[1], self.data))
-    #     https: // tproger.ru / translations / asterisks - in -python - what - they - are - and -how - to - use - them /
-
 
 graph_1 = Graph()
 graph_1.set_data([10, -5, 100, 20, 0, 80, 45, 2, 5, 7])
@@ -207,7 +203,6 @@ sd = StreamData()
 print(sd.create(list(sr.FIELDS), '10 Питон-основы-мастерства 512'))
 
 
-# программу не менять, только добавить два метода
 # считывание списка строк из входного потока
 lst_in = list(map(str.strip, sys.stdin.readlines()))
 
@@ -1759,19 +1754,18 @@ class PathLines:
         return self.lines
 
     def get_length(self):
-        # def set_values(self: object, i: int):
-        #     return self.lines[i].x, self.lines[i].y
-        #
-        # c_sum = 0
-        # for i in range(len(self.lines)):
-        #     if i == 0:
-        #         x0, y0 = 0, 0
-        #     x1, y1 = set_values(self, i)
-        #     c_sum += sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)
-        #     x0, y0 = set_values(self, i)
+        def set_values(self: object, i: int):
+            return self.lines[i].x, self.lines[i].y
 
-        # return c_sum
-        return 73.6
+        c_sum = 0
+        for i in range(len(self.lines)):
+            if i == 0:
+                x0, y0 = 0, 0
+            x1, y1 = set_values(self, i)
+            c_sum += sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)
+            x0, y0 = set_values(self, i)
+
+        return c_sum
 
     def add_line(self, line):
         self.lines.append(line)
