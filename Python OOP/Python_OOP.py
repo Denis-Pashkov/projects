@@ -1946,3 +1946,39 @@ class Product:
     def __init__(self, name: str, price: IF) -> None:
         self.name = name
         self.price = price
+        
+
+class Bag:
+    def __init__(self, max_weight: int) -> None:
+        self.max_weight = max_weight
+        self.__things = []
+
+    @property
+    def things(self) -> list:
+        return self.__things
+
+    def add_thing(self, thing: object) -> None:
+        if self.get_total_weight() + thing.weight <= self.max_weight:
+            self.__things.append(thing)
+
+    def remove_thing(self, indx: int) -> None:
+        self.__things.pop(indx)
+
+    def get_total_weight(self) -> int:
+        return sum([i.weight for i in self.__things])
+
+
+class Thing:
+    def __init__(self, name: str, weight: float) -> None:
+        self.name = name
+        self.weight = weight
+
+
+bag = Bag(1000)
+bag.add_thing(Thing("Книга по Python", 100))
+bag.add_thing(Thing("Котелок", 500))
+bag.add_thing(Thing("Спички", 20))
+bag.add_thing(Thing("Бумага", 100))
+w = bag.get_total_weight()
+for t in bag.things:
+    print(f"{t.name}: {t.weight}")
