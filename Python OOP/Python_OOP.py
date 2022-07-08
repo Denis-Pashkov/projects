@@ -1892,3 +1892,57 @@ class RegisterForm:
 
     def show(self):
         print('<form>', f'Логин: {self.login}', f'Пароль: {self.password}', f'Email: {self.email}', '</form>', sep='\n')
+        
+
+from typing import TypeVar, Any
+
+IF = TypeVar('IF', int, float)
+
+
+class StringValue:
+    def __init__(self, min_length: int = 2, max_length: int = 50) -> None:
+        self.min_length = min_length
+        self.max_length = max_length
+
+    def __set_name__(self, owner: object, name: str) -> None:
+        self.name = '_' + name
+
+    def __get__(self, instance: object, owner: object) -> Any:
+        return getattr(instance, self.name)
+
+    def __set__(self, instance: object, value: str) -> None:
+        if isinstance(value, str) and self.min_length <= len(value) <= self.max_length:
+            setattr(instance, self.name, value)
+
+
+class PriceValue(StringValue):
+    def __init__(self, max_value: IF = 1000):
+        self.max_value = max_value
+
+    def __set__(self, instance: object, value: IF) -> None:
+        if isinstance(value, (int, float)) and 0 <= value <= self.max_value:
+            setattr(instance, self.name, value)
+
+
+class SuperShop:
+    goods = []
+
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    @classmethod
+    def add_product(cls, product: object) -> None:
+        cls.goods.append(product)
+
+    @classmethod
+    def remove_product(cls, product: object) -> None:
+        cls.goods.pop(cls.goods.index(product))
+
+
+class Product:
+    name = StringValue()
+    price = PriceValue()
+
+    def __init__(self, name: str, price: IF) -> None:
+        self.name = name
+        self.price = price
