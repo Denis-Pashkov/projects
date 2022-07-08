@@ -1982,3 +1982,75 @@ bag.add_thing(Thing("Бумага", 100))
 w = bag.get_total_weight()
 for t in bag.things:
     print(f"{t.name}: {t.weight}")
+    
+
+from typing import Any
+
+
+class Descriptor:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def __set_name__(self, owner: object, name: str) -> None:
+        self.name = self.name
+
+    def __get__(self, instance: object, owner: object) -> Any:
+        return getattr(instance, self.name)
+
+    def __set__(self, instance: object, value: str) -> None:
+        setattr(instance, self.name, value)
+
+
+class TVProgram:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.items = []
+
+    def add_telecast(self, tl: object) -> None:
+        self.items.append(tl)
+
+    def remove_telecast(self, indx) -> None:
+        self.items = [i for i in self.items if i.uid != indx]
+
+
+class Telecast:
+    # __id = Descriptor('uid')
+    # __name = Descriptor('name')
+    # __duration = Descriptor('duration')
+
+    def __init__(self, id: int, name: str, duration: int) -> None:
+        self.__id = id
+        self.__name = name
+        self.__duration = duration
+
+    @property
+    def uid(self) -> None:
+        return self.__id
+
+    @uid.setter
+    def uid(self, value: int) -> None:
+        self.__id = value
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        self.__name = value
+
+    @property
+    def duration(self):
+        return self.__duration
+
+    @duration.setter
+    def duration(self, value):
+        self.__duration = value
+
+
+pr = TVProgram("Первый канал")
+pr.add_telecast(Telecast(1, "Доброе утро", 10000))
+pr.add_telecast(Telecast(2, "Новости", 2000))
+pr.add_telecast(Telecast(3, "Интервью с Балакиревым", 20))
+for t in pr.items:
+    print(f"{t.name}: {t.duration}")
