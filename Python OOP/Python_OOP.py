@@ -2054,3 +2054,21 @@ pr.add_telecast(Telecast(2, "Новости", 2000))
 pr.add_telecast(Telecast(3, "Интервью с Балакиревым", 20))
 for t in pr.items:
     print(f"{t.name}: {t.duration}")
+    
+
+class Book:
+    dic = {"title": str, "author": str, "pages": int, "year": int}
+
+    def __init__(self, title: str = '', author: str = '', pages: int = 0, year: int = 0) -> None:
+        self.title = title
+        self.author = author
+        self.pages = pages
+        self.year = year
+
+    def __setattr__(self, key, value):
+        if self.dic[key] != type(value):
+            raise TypeError("Неверный тип присваиваемых данных.")
+        object.__setattr__(self, key, value)
+
+
+book = Book('Python ООП', 'Сергей Балакирев', 123, 2022)
