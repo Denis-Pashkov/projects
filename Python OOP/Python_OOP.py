@@ -2072,3 +2072,46 @@ class Book:
 
 
 book = Book('Python ООП', 'Сергей Балакирев', 123, 2022)
+
+
+from typing import TypeVar, Any
+
+IF = TypeVar('IF', int, float)
+
+
+class Shop:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.goods = []
+
+    def add_product(self, product: object) -> None:
+        self.goods.append(product)
+
+    def remove_product(self, product: object) -> None:
+        self.goods.pop(self.goods.index(product))
+
+
+class Product:
+    id = 0
+
+    def __init__(self, name: str, weight: IF, price: IF) -> None:
+        self.id = self.id
+        self.name = name
+        self.weight = weight
+        self.price = price
+
+    def __new__(cls, *args, **kwargs) -> object:
+        cls.id += 1
+        return super().__new__(cls)
+
+    def __setattr__(self, key: str, value: Any) -> None:
+        if (key == 'id' and isinstance(value, int)) or (key == 'name' and isinstance(value, str)) or (
+                key in ['weight', 'price'] and isinstance(value, (int, float)) and value >= 0):
+            object.__setattr__(self, key, value)
+        else:
+            raise TypeError("Неверный тип присваиваемых данных.")
+
+    def __delattr__(self, item: str) -> None:
+        if item == 'id':
+            raise AttributeError("Атрибут id удалять запрещено.")
+        object.__delattr__(self, item)
