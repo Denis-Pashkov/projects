@@ -2115,3 +2115,47 @@ class Product:
         if item == 'id':
             raise AttributeError("Атрибут id удалять запрещено.")
         object.__delattr__(self, item)
+        
+
+class Course:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.modules = []
+
+    def add_module(self, module):
+        self.modules.append(module)
+
+    def remove_module(self, indx):
+        self.modules.pop(indx)
+
+
+class Module:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.lessons = []
+
+    def add_lesson(self, lesson: object):
+        self.lessons.append(lesson)
+
+    def remove_lesson(self, indx):
+        self.lessons.pop(indx)
+
+
+class LessonItem:
+    def __init__(self, title: str, practices: int, duration: int) -> None:
+        self.title = title
+        self.practices = practices
+        self.duration = duration
+
+    def __setattr__(self, key, value) -> None:
+        if (key == 'title' and isinstance(value, str)) or (
+                key in ['practices', 'duration'] and isinstance(value, int) and value >= 0):
+            object.__setattr__(self, key, value)
+        else:
+            raise TypeError("Неверный тип присваиваемых данных.")
+
+    def __getattr__(self, item):
+        return False
+
+    def __delattr__(self, item):
+        return False
