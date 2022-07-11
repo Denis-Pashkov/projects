@@ -2159,3 +2159,43 @@ class LessonItem:
 
     def __delattr__(self, item):
         return False
+    
+    
+
+class Museum:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.exhibits = []
+
+    def add_exhibit(self, obj: object) -> None:
+        self.exhibits.append(obj)
+
+    def remove_exhibit(self, obj: object) -> None:
+        self.exhibits.pop(self.exhibits.index(obj))
+
+    def get_info_exhibit(self, indx: int) -> str:
+        return f'Описание экспоната {self.exhibits[indx].name}: {self.exhibits[indx].descr}'
+
+
+class CommonAttr:
+    def __init__(self, name: str, descr: str) -> None:
+        self.name = name
+        self.descr = descr
+
+
+class Picture(CommonAttr):
+    def __init__(self, name: str, author: str, descr: str) -> None:
+        super().__init__(name, descr)
+        self.author = author
+
+
+class Mummies(CommonAttr):
+    def __init__(self, name: str, location: str, descr: str) -> None:
+        super().__init__(name, descr)
+        self.location = location
+
+
+class Papyri(CommonAttr):
+    def __init__(self, name: str, date: str, descr: str) -> None:
+        super().__init__(name, descr)
+        self.date = date
