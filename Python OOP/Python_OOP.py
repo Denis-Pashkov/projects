@@ -2282,3 +2282,61 @@ circle = Circle(10.5, 7, 22)
 circle.radius = -10
 x, y = circle.x, circle.y
 res = circle.name
+
+
+import time
+
+
+class GeyserClassic:
+    MAX_DATE_FILTER = 100
+
+    def __init__(self):
+        self.slots = {1: None, 2: None, 3: None}
+        self.slots_id = [1, 2, 3]
+
+    def add_filter(self, slot_num: int, filter: object) -> None:
+        if (slot_num == 1 and isinstance(filter, Mechanical)) or (slot_num == 2 and isinstance(filter, Aragon)) or (
+                slot_num == 3 and isinstance(filter, Calcium)):
+            self.slots[slot_num] = filter
+
+    def remove_filter(self, slot_num: int):
+        self.slots[slot_num] = None
+
+    def get_filters(self) -> tuple:
+        return tuple([self.slots[i] for i in self.slots_id])
+
+    def water_on(self):
+        return bool([self.slots[i] for i in self.slots_id].count(None) == 0 and all(list(
+            map(lambda date: bool(0 <= time.time() - date <= self.MAX_DATE_FILTER),
+                [self.slots[i].date for i in self.slots_id]))))
+
+
+class CommonAttr:
+    def __init__(self, date: float) -> None:
+        self.date = date
+
+    def __setattr__(self, key: str, value: float) -> None:
+        if not hasattr(self, key):
+            object.__setattr__(self, key, value)
+
+
+class Mechanical(CommonAttr):
+    pass
+
+
+class Aragon(CommonAttr):
+    pass
+
+
+class Calcium(CommonAttr):
+    pass
+
+my_water = GeyserClassic()
+my_water.add_filter(1, Mechanical(time.time()))
+my_water.add_filter(2, Aragon(time.time()))
+w = my_water.water_on()
+my_water.add_filter(3, Calcium(time.time()))
+w = my_water.water_on()
+f1, f2, f3 = my_water.get_filters()
+my_water.add_filter(3, Calcium(time.time()))
+my_water.add_filter(2, Calcium(time.time()))
