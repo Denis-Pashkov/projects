@@ -2237,3 +2237,48 @@ sm.add_app(AppVK())  # второй раз добавляться не долж�
 sm.add_app(AppYouTube(2048))
 for a in sm.apps:
     print(a.name)
+    
+    
+from typing import TypeVar, Any
+
+IF = TypeVar('IF', int, float)
+
+
+class Descriptor:
+    def __set_name__(self, owner: object, name: str) -> None:
+        self.name = name.split('__')[1]
+        print(self.name)
+
+    def __get__(self, instance: object, owner: object) -> Any:
+        return getattr(instance, self.name)
+
+    def __set__(self, instance: object, value) -> None:
+        if (self.name == 'radius' and value >= 0 and self.validate_type(value)) or (
+                self.name != 'radius' and self.validate_type(value)):
+            setattr(instance, self.name, value)
+        else:
+            raise TypeError("Неверный тип присваиваемых данных.")
+
+    @staticmethod
+    def validate_type(value: Any) -> bool:
+        return bool(isinstance(value, (int, float)))
+
+
+class Circle:
+    __x = Descriptor()
+    __y = Descriptor()
+    __radius = Descriptor()
+
+    def __init__(self, x: IF, y: IF, radius: IF):
+        self.__x = x
+        self.__y = y
+        self.__radius = radius
+
+    def __getattr__(self, item):
+        return False
+
+
+circle = Circle(10.5, 7, 22)
+circle.radius = -10
+x, y = circle.x, circle.y
+res = circle.name
