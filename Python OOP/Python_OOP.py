@@ -2340,3 +2340,24 @@ w = my_water.water_on()
 f1, f2, f3 = my_water.get_filters()
 my_water.add_filter(3, Calcium(time.time()))
 my_water.add_filter(2, Calcium(time.time()))
+
+from random import choice, randint
+
+
+class RandomPassword:
+    def __init__(self, psw_chars: str, min_length: int, max_length: int) -> None:
+        self.psw_chars = psw_chars
+        self.min_length = min_length
+        self.max_length = max_length
+
+    def __call__(self, *args, **kwargs) -> str:
+        return ''.join([choice(self.psw_chars) for i in range(0, randint(self.min_length, self.max_length))])
+
+
+min_length = 5
+max_length = 20
+psw_chars = "qwertyuiopasdfghjklzxcvbnm0123456789!@#$%&*"
+
+rnd = RandomPassword(psw_chars, min_length, max_length)
+
+lst_pass = [rnd() for i in range(0, 3)]
