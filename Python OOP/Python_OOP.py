@@ -2361,3 +2361,16 @@ psw_chars = "qwertyuiopasdfghjklzxcvbnm0123456789!@#$%&*"
 rnd = RandomPassword(psw_chars, min_length, max_length)
 
 lst_pass = [rnd() for i in range(0, 3)]
+
+class ImageFileAcceptor:
+    def __init__(self, extensions: tuple):
+        self.extensions = extensions
+
+    def __call__(self, *args, **kwargs):
+        return bool(args[0].split('.')[1] in self.extensions)
+
+
+filenames = ["boat.jpg", "web.png", "text.txt", "python.doc", "ava.jpg", "forest.jpeg", "eq_1.png", "eq_2.png"]
+acceptor = ImageFileAcceptor(('jpg', 'bmp', 'jpeg'))
+image_filenames = filter(lambda x: acceptor(x), filenames)
+print(list(image_filenames))
