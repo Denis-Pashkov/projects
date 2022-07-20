@@ -2422,3 +2422,13 @@ lg = LoginForm("Вход на сайт", validators=[LengthValidator(3, 50), Cha
 lg.post({"login": "root", "password": "panda"})
 if lg.is_validate():
     print("Дальнейшая обработка данных формы")
+    
+
+class DigitRetrieve:
+    def __call__(self, *args, **kwargs):
+        a = None
+        try:
+            a = int(args[0])
+        except:
+            pass
+        return a
