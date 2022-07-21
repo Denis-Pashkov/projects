@@ -2470,3 +2470,18 @@ class SearchID:
 
 a = SearchID('1.txt')
 print(a.get_id())
+
+
+class RenderList:
+    def __init__(self, type_list):
+        self.type_list = type_list if type_list in ['ul', 'ol'] else 'ul'
+
+    def __call__(self, *args, **kwargs):
+        n = '\n'
+        return f'<{self.type_list}>{n}{"".join([f"<li>{i}</li>{n}" for i in args[0]])}</{self.type_list}>'
+
+
+lst = ["Пункт меню 1", "Пункт меню 2", "Пункт меню 3"]
+render = RenderList("ol")
+html = render(lst)
+print(html)
