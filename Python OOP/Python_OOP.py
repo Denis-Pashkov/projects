@@ -2432,3 +2432,41 @@ class DigitRetrieve:
         except:
             pass
         return a
+    
+
+class SearchID:
+    def __init__(self, filename: str) -> None:
+        file = self._validate_filename(filename)
+        self._count, self._lst = int(file.readline()), file.readline().split(' ')
+
+    def get_id(self) -> str:
+        if self._count % 2 == 0:
+            return 'Все сотрудники заполнили билеты'
+        else:
+            counter = {}
+            lst_id = []
+
+            for i in set(self._lst):
+                counter[i] = 0
+                lst_id.append(i)
+
+            for i in self._lst:
+                counter[i] += 1
+
+            for i in lst_id:
+                if counter[i] != 2:
+                    return i
+
+    @staticmethod
+    def _validate_filename(filename: str):
+        if isinstance(filename, str):
+            try:
+                return open(filename, 'r')
+            except FileNotFoundError:
+                raise FileNotFoundError(f'Файл с именем {filename} не найден')
+        else:
+            raise TypeError('В качестве аргумента filename ожидается строка')
+
+
+a = SearchID('1.txt')
+print(a.get_id())
