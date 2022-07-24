@@ -2485,3 +2485,24 @@ lst = ["Пункт меню 1", "Пункт меню 2", "Пункт меню 3"
 render = RenderList("ol")
 html = render(lst)
 print(html)
+
+
+class HandlerGET:
+    def __init__(self, func) -> None:
+        self.__func = func
+
+    def __call__(self, request: dict, *args, **kwargs) -> str:
+        return self.get(self.__func, request, *args, **kwargs)
+
+    @staticmethod
+    def get(func, request: dict, *args, **kwargs) -> str:
+        return f'GET: {func(request)}' if request.get('method') in ('GET', None) else None
+
+
+@HandlerGET
+def contact(request):
+    return "123"
+
+
+res = contact({"method": "GET", "url": "contact.html"})
+print(res)
